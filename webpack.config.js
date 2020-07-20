@@ -8,7 +8,10 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     resolve:{
-        extensions: [".ts", ".tsx",".js"]
+        extensions: [".ts", ".tsx",".js"],
+        alias: {
+            '@': path.resolve(__dirname, 'src/')
+        }
     },
     mode: 'production',
     module: {
@@ -31,8 +34,6 @@ module.exports = {
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
-        compress: true,
-        hot: true,
         port: 1060,
         stats: 'minimal'
     }

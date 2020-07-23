@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" id="a" v-model="text">
+        {{text}}
+      </div>
+    <script src="./MVVM.js"></script>
+    <script src="./Observe.js"></script>
+    <script src="./Dep.js"></script>
+    <script src="./Compile.js"></script>
+    <script>
+        const vm = new Vue({
+            el: 'app',
+            data: {
+                text: 1
+            }
+        })
+        console.log(vm)
+    </script>
+</body>
+</html>

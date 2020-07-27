@@ -265,23 +265,52 @@ class ExampleComponent6 extends Component {
  * 更新前读取DOM属性
  * 该组件在更新之前从DOM中读取属性，
  * 以便在列表中保持滚动的位置
+ * brefore
+ * 对于异步渲染。渲染阶段的生命周期，如（componentWillUpdate和render）、提交阶段如（componentDidUpdate）之间可能存在延迟
+ * 用户在这段时间内调整窗口大小，那么从componentWillUpdate 读取的 scrollHeight 值将过时
  */
-class ScrollingList extends Component {
-  componentWillUpdate(nextProps, nextState) {
-    // 我们正在向列表添加新项目吗？
-    // 捕获滚动位置，以便于稍后我们可以调整滚动位置
-    if (this.props.list.length < nextProps.list.length) {
-      this.previousScrollOffset =
-        this.listRef.scrollHeight - this.listRef.scrollTop;
+
+// class ScrollingList extends Component {
+//   componentWillUpdate(nextProps, nextState) {
+//     // 我们正在向列表添加新项目吗？
+//     // 捕获滚动位置，以便于稍后我们可以调整滚动位置
+//     if (this.props.list.length < nextProps.list.length) {
+//       this.previousScrollOffset =
+//         this.listRef.scrollHeight - this.listRef.scrollTop;
+//     }
+//   }
+//   componentDidUpdate(prevProps, prevState) {
+//     // 如果我们刚刚添加了新项，并且设置了 previousScrollOffset。
+//     // 调整滚动位置，以便这些新项不会把旧项挤出视图。
+//     if (this.previousScrollOffset !== null) {
+//       this.listRef.scrollTop =
+//         this.listRef.scrollHeight - this.previousScrollOffset;
+//       this.previousScrollOffset = null;
+//     }
+//   }
+// }
+
+class ScrollingList extends React.Component {
+  listRef = null;
+  /**
+   * 使用新的提交阶段声明周期 getSnapshotBeforeUpdate。这个方法在发生变化前立即被调用（在更新DOM之前）
+   * 可以返回一个React的值作为参数传递给componentDidUpdate方法，该方法在发生变化后立即被调用
+   */
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    // 我们正在向列表中添加新项吗？
+    // 捕获滚动位置，以便我们稍后可以调整滚动位置。
+    if (prevProps.list.length < this.props.list.length) {
+      return this.listRef.scrollHeight - this.listRef.scrollTop;
     }
+    return null;
   }
-  componentDidUpdate(prevProps, prevState) {
-    // 如果我们刚刚添加了新项，并且设置了 previousScrollOffset。
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // 如果我们刚刚添加了新项，并且有了快照值。
     // 调整滚动位置，以便这些新项不会把旧项挤出视图。
-    if (this.previousScrollOffset !== null) {
-      this.listRef.scrollTop =
-        this.listRef.scrollHeight - this.previousScrollOffset;
-      this.previousScrollOffset = null;
+    // （此处的快照是从 getSnapshotBeforeUpdate 返回的值）
+    if (snapshot !== null) {
+      this.listRef.scrollTop = this.listRef.scrollHeight - snapshot;
     }
   }
 }

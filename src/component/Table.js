@@ -250,19 +250,11 @@ class FormComponent extends Component {
   }
 }
 class Form extends Component {
-  componentWillMount() {
-    console.log(3);
-  }
-
   initialState = {
     name: "",
     job: "",
   };
   state = this.initialState;
-  componentWillReceiveProps(props, state) {
-    console.log(props, state, 3637);
-    return props;
-  }
   handleChange = (event) => {
     /**
      * 读取标签属性

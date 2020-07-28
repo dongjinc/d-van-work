@@ -36,8 +36,8 @@ class Square extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div>123 {this.name}</div>
-          <img src={logo} alt="logo" />
+          <div style={{ backgroundColor: "#fff" }}>123 {this.name}</div>
+          {/* <img src={logo} alt="logo" /> */}
         </header>
         <Table />
       </div>

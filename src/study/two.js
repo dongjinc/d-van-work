@@ -29,10 +29,17 @@ const user = {
  * 使用camelCase（小驼峰）来定义属性的名称，而不是用html属性名称
  */
 // const element = <img src={logo} alt="123"></img>;
+/**
+ * 包含很多子元素
+ */
 const element = (
   <div>
     <h1>Hello</h1>
     <h1>Hello。goo to</h1>
   </div>
 );
+/**
+ * JSX防止注入攻击
+ */
+// const title = response.potentiallyMaliciousInput;
 export default element;

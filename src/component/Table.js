@@ -215,10 +215,11 @@ class FormComponent extends Component {
   state = {
     characters: [],
   };
-  static getDerivedStateFromProps(props, state) {
-    console.log(props, state, 3636);
-    return props;
-  }
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log(props, state, 3636);
+  //   return props;
+  // }
+
   /**
    * 更改数组必须要使用 this.setState 。this.state.property 是不工作的
    */

@@ -1,7 +1,8 @@
 // import '@/object/js-basic/entries'
 // import '@/object/js-basic/keys'
 // import '@/array/skill'
-import '@/interview/one'
+// import '@/interview/one'
+import "@/regex/demo";
 
 // const list = {
 //     caliber_style: [{value: "1", label: "DN15"}, {value: "2", label: "DN20"}, {value: "3", label: "DN25"}],
@@ -29,9 +30,7 @@ import '@/interview/one'
 // const newObj = list1.reduce(keyValue, {})
 // console.log(newObj, 6363)
 
-
-
-// const list3 = list1.map(item => ({ //@ts-ignore 
+// const list3 = list1.map(item => ({ //@ts-ignore
 //     [item.EN]: list[item.code]
 // }))
 // const userStr = JSON.stringify(list)

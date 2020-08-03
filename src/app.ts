@@ -2,8 +2,12 @@
 // import '@/object/js-basic/keys'
 // import '@/array/skill'
 // import '@/interview/one'
-import "@/regex/demo";
+// import "@/regex/demo";
 
+/**
+ * typescript
+ */
+import "@/typescript/generics"
 // const list = {
 //     caliber_style: [{value: "1", label: "DN15"}, {value: "2", label: "DN20"}, {value: "3", label: "DN25"}],
 //     classifyone: [{value: "1", label: "总表"}, {value: "2", label: "分表"}, {value: "3", label: "单表"}],

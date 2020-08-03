@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script src="./element.js"></script>
     <script>
-        let uli = createElement('ul', {class: 'list'}, [
-            createElement('li', {class: 'item'}, [
-                "1"
-            ]),
-            createElement('li', {class: 'item'}, [
-                "1"
-            ]),
-            createElement('li', {class: 'item'}, [
-                "1"
-            ])
-        ])
-        const vdom = uli.render()
-        document.body.appendChild(vdom)
-        console.log(vdom, 11)
+      let uli = createElementNode("ul", { class: "list" }, [
+        createElementNode("li", { class: "item" }, ["1"]),
+        createElementNode("li", { class: "item" }, ["1"]),
+        createElementNode("li", { class: "item" }, ["1"]),
+      ]);
+      console.log(uli)
+      const vdom = uli.render()
+      document.body.appendChild(vdom)
+    //   console.log(vdom, 11);
     </script>
-</body>
+  </body>
 </html>

@@ -30,13 +30,13 @@
 //     changeTitle('b')
 // })
 
-class HistoryRoute {
+class History{
     routes = {}
-    getPath(){
+    getRouter(){
         const path = window.location.pathname
         return path || '/'
     }
-    initPath(path){
+    initRouter(path){
         history.replaceState('', '', path)
         this.routes[path] && this.routes[path]()
     }
@@ -49,10 +49,30 @@ class HistoryRoute {
     }
     constructor(){
         window.addEventListener('popstate', () => {
-            const path = this.getPath()
+            const path = this.getRouter()
             this.routes[path] && this.routes[path]()
         })
     }
 }
-
-const Router = new HistoryRoute()
+const router = new History()
+const dom = document.getElementById('app')
+function changeTitle(title){
+    dom.innerHTML = title
+}
+router.route('/', () => {
+    changeTitle('首页')
+})
+router.route('/one', () => {
+    changeTitle('第一页')
+})
+router.route('/two', () => {
+    changeTitle('第二页')
+})
+router.initRouter(window.location.pathname)
+const ul = document.querySelector('ul')
+ul.addEventListener('click', (e) => {
+    if(e.target.tagName === 'A'){
+        e.preventDefault()
+        router.go(e.target.getAttribute('href'))
+    }
+})

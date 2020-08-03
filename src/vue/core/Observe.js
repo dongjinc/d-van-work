@@ -2,7 +2,7 @@ function defineReactive(vm, key, val){
     var dep = new Dep()
     Object.defineProperty(vm, key, {
         get(){
-            console.log(Dep.target)
+            console.log(Dep.target, 'Dep.target')
             if(Dep.target){
                 dep.addSub(Dep.target)
             }

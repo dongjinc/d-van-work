@@ -23,6 +23,31 @@ function createElement(tagName, attr, childrens){
     return new Element(tagName, attr, childrens)
 }
 
+
+
+
+
+
+class ElementNode {
+    constructor(tagName, attribute, childrens){
+        this.tagName = tagName;
+        this.attribute = attribute;
+        this.childrens = childrens
+    }
+    render(){
+        let element = document.createElement(this.tagName)
+        element.attribute = this.attribute
+        this.childrens.forEach(ele => {
+            const childElement = ele instanceof ElementNode? ele.render(): document.createTextNode(ele) 
+            element.appendChild(childElement)
+        })
+        return element
+    }
+}
+function createElementNode(tagName, attribute, childrens){
+    return new ElementNode(tagName, attribute, childrens)
+}
+
 /**
  * keep-live
  * 1.抽象组件

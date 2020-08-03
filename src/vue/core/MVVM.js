@@ -4,4 +4,5 @@ function Vue(option){
     observe(data, this)
     this.id = option.el
     var dom = new Compile(document.getElementById(this.id), this)
+    document.getElementById('app').appendChild(dom)
 }

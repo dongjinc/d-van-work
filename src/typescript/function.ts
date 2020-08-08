@@ -207,15 +207,15 @@ let uiElement: UIElement
 // uiElement.addClickListener(h.onClickGood)
 
 // 因为onClickGood指定了this类型为void，因此传递给addClickListener是合法的。当然，这也意味着不能使用this.info。所以不得不使用箭头函数
-class Handler{
-    info: string;
-    onClickGood = (e: Event) => {
-        // @ts-ignore
-        this.info = e.message
-    }
-}
-let h = new Handler()
-uiElement.addClickListener(h.onClickGood)
+// class Handler{
+//     info: string;
+//     onClickGood = (e: Event) => {
+//         // @ts-ignore
+//         this.info = e.message
+//     }
+// }
+// let h = new Handler()
+// uiElement.addClickListener(h.onClickGood)
 // ** 这是可行的因为箭头函数不会捕获this。所以把他们传给期望this: void
 // 缺点： Handler对象都会创建一个箭头函数。另一方面，添加到Handler原型链上。它们在不同Handler对象间是共享的
 
@@ -224,7 +224,27 @@ uiElement.addClickListener(h.onClickGood)
  * 一定要把最精确的定义放在最前面
  * 其中带有any类型并不是重载列表的一部分
  */
-
+let suits = ["hearts", "spades", "clubs", "diamonds"];
+function pickCard(x): any
+ {
+     if(typeof x === "object"){
+         let pickedCard = Math.floor(Math.random() * x.length )
+         return pickedCard
+     } else if(typeof x === "number"){
+         let pickedSuit = Math.floor(x / 13);
+         return {
+             suit: suits[pickedSuit],
+             card: x % 13
+         }
+     }
+ }
+let myDeck = [
+    { suit: "diamonds", card: 2 }, { suit: "spades", card: 10 }, { suit: "hearts", card: 4 }
+]
+let pickedCard1 = myDeck[pickCard(myDeck)]
+console.log(pickedCard1)
+let pickedCard2 = pickCard(15)
+console.log(pickedCard2)
  /**
   * 总结
   * 1.函数类型 (1)参数添加类型之后再为函数本身添加返回值类型;

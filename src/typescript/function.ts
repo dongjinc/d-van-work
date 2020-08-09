@@ -245,6 +245,31 @@ let pickedCard1 = myDeck[pickCard(myDeck)]
 console.log(pickedCard1)
 let pickedCard2 = pickCard(15)
 console.log(pickedCard2)
+// pickCard方法根据传入参数的不同会返回两种不同的类型
+// **方法是为同一个函数提供多个函数类型定义来进行函数重载
+interface pickCardInfo {
+    suit: string
+    card: number
+}
+function pickCard1(x: pickCardInfo[]): number
+function pickCard1(x: number): pickCardInfo
+function pickCard1(x): any{
+    if (typeof x == "object") {
+        let pickedCard = Math.floor(Math.random() * x.length);
+        return pickedCard;
+    }
+    // Otherwise just let them pick the card
+    else if (typeof x == "number") {
+        let pickedSuit = Math.floor(x / 13);
+        return { suit: suits[pickedSuit], card: x % 13 };
+    }
+}
+// **注意 function pickCard(x): any  并不是重载列表的一部分。因此这里只有两个重载：一个接受对象，另一个接受数字
+
+let pickedCardT = myDeck[pickCard1(myDeck)]
+let pickedCardT1 = pickCard1(12)
+
+
  /**
   * 总结
   * 1.函数类型 (1)参数添加类型之后再为函数本身添加返回值类型;

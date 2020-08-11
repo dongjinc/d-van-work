@@ -302,4 +302,80 @@ department.printMeeting()
 
 /**
  * 高级技巧
+ * **当在ts声明一个类的时候，实际上同时声明了很多东西。首先就是类的实例和类型
+ */
+class Greeter1 {
+    greeting: string
+    constructor(message: string){
+        this.greeting = message
+    }
+    greet(){
+        return `Hello, ${this.greeting}`
+    }
+}
+let greeter1: Greeter1
+greeter1 = new Greeter1('world')
+greeter1.greet()
+
+class Greeter2 {
+    static standardGreeting = "Hello, there"
+    greeting: string;
+    greet(){
+        if(this.greeting){
+            return `Hello, ${this.greeting}`
+        }
+        else {
+            return Greeter2.standardGreeting
+        }
+    }
+}
+let greeter2: Greeter2
+greeter2 = new Greeter2()
+console.log(greeter2.greet(), 1)
+// 使用typeof Greeter，意思取Greeter类的类型，而不是实例的类型。包含了静态成员和构造函数
+let greeterMarker: typeof Greeter2 = Greeter2
+greeterMarker.standardGreeting = "Hey there!"
+
+let greeter3: Greeter2 = new greeterMarker()
+console.log(greeter2.greet(), 2)
+console.log(Greeter2.standardGreeting, 3)
+
+// 把类当作接口使用
+// 类定义会创建两个东西：类的实例类型和一个构造函数
+
+class Point1 {
+    x: number
+    y: number
+}
+interface Point3d extends Point1 {
+    z: number
+}
+let point3d: Point3d = {x: 1, y: 2, z: 3}
+
+/** 总结
+ * 1.类 传统的js程序使用函数和基于原型的继承来创建可重用的组件
+ * 2.继承
+ * (1).最基本模式就是允许使用继承来扩展现有类
+ * (2).派生类通常被称作子类。基类通常被称作超类
+ * (3).派生类的构造函数必须调用super(在构造函数中访问this的属性之前)
+ * 3.修饰符
+ * (1).在ts成员都默认为public
+ * (2).当成员被标记为private时，不能在声明它的类外部访问。不能在派生类中访问
+ * (3).出自两个类包含一个private成员时，两者是不相等的。除非来自同一声明类
+ * (4).protected成员可在派生类中仍然可以访问。构造函数可以标记成protected，这个类不能实例化，但可以被继承。外部可以通过派生类的实例方法访问
+ * (5).readonly修饰符 关键字将属性设置只读
+ * 4.参数属性
+ * (1).参数属性可以方便地定义并初始化一个成员(public private protected readonly)
+ * 5.存取器
+ * (1).要求编译器es5或更高，不支持降级到es3
+ * (2).只带有get不带有set的存取器自动被推断为readonly
+ * 6.静态属性
+ * (1).存在与类本身上面而不是类的实例上
+ * 7.抽象类
+ * (1).抽象类作为其他派生类的基类使用。一般不会直接被实例化
+ * (2).不同于接口，抽象类可以包含成员的实现细节
+ * (3).abstract关键字用于定义抽象类和方法
+ * (4).抽象类中的抽象方法不包含具体实现(具体要看抽象类中，方法名前是否带有abstract修饰符)，必须在派生类中实现。
+ * 8.高级技巧
+ * 当ts声明一个类，同时声明了类的实例和类型
  */

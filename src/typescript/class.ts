@@ -379,3 +379,22 @@ let point3d: Point3d = {x: 1, y: 2, z: 3}
  * 8.高级技巧
  * 当ts声明一个类，同时声明了类的实例和类型
  */
+
+/**
+ * ES5中的继承
+ * 类的prototype属性和__proto__属性
+ * ES6中类的继承
+ * Object.getPrototypeOf
+ * super作为函数，作为对象
+ * 
+ * es5原生构造函数
+ * Boolean
+ * Number
+ * String
+ * Array
+ * Date
+ * Function
+ * RegExp
+ * Error
+ * Object
+ */

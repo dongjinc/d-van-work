@@ -138,3 +138,23 @@ function Lko(param: LogLevel){}
  * 为了避免在额外生成的代码上开销和额外的非直接的对枚举成员访问
  * 编译阶段会被删除。常量枚举成员在使用的地方会被内联进来。不允许包含计算成员
  */
+
+function promise1(){
+    return new Promise((reslove, reject) => {
+        reslove(1)
+    })
+}
+function promise2(){
+    return new Promise((reslove, reject) => {
+        throw new Error('1')
+        reslove(1)
+    })
+}
+function fn(){
+    Promise.all([promise1, promise2].map(item => item().then(it => it).catch(e => {
+        console.log(e)
+    }))).then(res => {
+        console.log(res)
+    })
+}
+fn()

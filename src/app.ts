@@ -6,7 +6,6 @@ import "@/regex/demo";
 
 // const { name } = require("@/node/module");
 // console.log(name);
-
 /**
  * typescript
  */

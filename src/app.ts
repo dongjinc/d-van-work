@@ -2,7 +2,10 @@
 // import '@/object/js-basic/keys'
 // import '@/array/skill'
 // import '@/interview/one'
-// import "@/regex/demo";
+import "@/regex/demo";
+
+// const { name } = require("@/node/module");
+// console.log(name);
 
 /**
  * typescript

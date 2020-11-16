@@ -76,4 +76,15 @@ function foo(el){
      id: 'dong'
  }
  myArray.forEach(foo, obj)
- 
+
+
+ enum OrderType {
+     '美妆' = 1,
+     '电器' = 2,
+     '家具' = 3
+ }
+ const orderFunction = {
+    [OrderType['']](){
+        console.log('美妆订单')
+    }
+ }

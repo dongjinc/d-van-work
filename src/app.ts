@@ -12,7 +12,12 @@
 // import "@/typescript/class"
 // import "@/typescript/enum"
 // import "@/typescript/type"
-import "@/blog/prototype/this"
+// import "@/blog/prototype/this"
+
+/**
+ * js
+ */
+import '@/youdontjs/extend'
 
 
 // const list = {

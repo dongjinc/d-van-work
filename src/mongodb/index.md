@@ -2,8 +2,34 @@
 1.mongodb
 - 连接数据库 (mongo、 mongo -uroot -pxxx)
 - 修改指定用户密码 db.updateUser('root', {pwd: '123456'})
+- 查询当前库下的账户 show users
 - service mongod start 
 - netstat -lanp | grep "27017"
+- 注意事项 
+#
+authentication failed（node连接数据库时报的错）
+
+    对于项目或第三方工具才能使用用户名和密码连接 mongodb指定的数据库
+    use mydb
+    #3切换至业务库 在该库创建访问该库的用户
+    db.createUser(
+    #4 创建用户
+        {
+        user: "mydbDBA",
+        pwd: "123321",
+        roles: [ {role:"dbOwner", db:"mydb"} ]
+        }
+    )
+ #
+ Error: couldn’t add user: No role named userAdminAnyDatabase@
+
+    数据库用户角色：read、readWrite;
+    数据库管理角色：dbAdmin、dbOwner、userAdmin；
+    集群管理角色：clusterAdmin、clusterManager、clusterMonitor、hostManager；备份恢复角色：backup、restore；
+    所有数据库角色：readAnyDatabase、readWriteAnyDatabase、userAdminAnyDatabase、dbAdminAnyDatabase
+    超级用户角色：root；这里还有几个角色间接或直接提供了系统超级用户的访问（dbOwner 、userAdmin、userAdminAnyDatabase）
+    内部角色：__system
+
 
 2.防火墙
 - systemctl status firewalld 查看防火墙状态

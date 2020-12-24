@@ -1,8 +1,9 @@
 ## Linux服务器
 1.mongodb
 - 连接数据库 (mongo、 mongo -uroot -pxxx)
-- 修改指定用户密码 db.updateUser('root', {pwd: '123456'})
-- 查询当前库下的账户 show users
+- 选择某个数据库，修改指定用户密码 db.updateUser('root', {pwd: '123456'})
+- 查询当前库下的账户 show users、db.getUsers()
+- 删除用户 db.dropUser('xx')
 - service mongod start 
 - netstat -lanp | grep "27017"
 - 注意事项 
@@ -20,6 +21,10 @@ authentication failed（node连接数据库时报的错）
         roles: [ {role:"dbOwner", db:"mydb"} ]
         }
     )
+ # 
+ Error: not authorized on blog to execute command
+ 是因为当前用户没有写入数据库的权限
+db.updateUser('dongjincheng', {roles: [{"role": "readWrite", "db": "blog"},{"role": "dbAdmin", "db": "blog"}]})
  #
  Error: couldn’t add user: No role named userAdminAnyDatabase@
 
@@ -39,6 +44,14 @@ authentication failed（node连接数据库时报的错）
 3.查看网络(端口)
 - netstat -lanp | grep "27017"
 
+4.pm2 deploy
+- 依靠ecosystem.config.js，deploy配置，与github相关远程库进行拉取代码进行部署。
+- 命令：pm2 deploy production setup(需要先初始化服务器应用)、pm2 deploy production(部署)
+
+5.常用命令：
+- 重命名 rename [匹配要替换的名字] [将要改成的名字] [当前文件名]、mv
+- 查看端口占用情况： lsof -i:端口号、netstat -tunlp 用于显示tcp、udp的端口号和进程等相关情况
+- 杀掉指定进程命令 kill -9 PID
 
 区分 systemctl和service
 [参考博客](https://cshihong.github.io/2018/10/15/Linux%E4%B8%8Bsystemctl%E5%91%BD%E4%BB%A4%E5%92%8Cservice%E3%80%81chkconfig%E5%91%BD%E4%BB%A4%E7%9A%84%E5%8C%BA%E5%88%AB/)

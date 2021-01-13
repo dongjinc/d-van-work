@@ -1019,7 +1019,6 @@
     shallow
   ) {
     var dep = new Dep();
-
     var property = Object.getOwnPropertyDescriptor(obj, key);
     if (property && property.configurable === false) {
       return
@@ -1269,7 +1268,6 @@
       }
       return mergeDataOrFn(parentVal, childVal)
     }
-
     return mergeDataOrFn(parentVal, childVal, vm)
   };
 
@@ -4995,7 +4993,6 @@
       initLifecycle(vm);
       initEvents(vm);
       initRender(vm);
-      debugger
       callHook(vm, 'beforeCreate');
       initInjections(vm); // resolve injections before data/props
       initState(vm);

@@ -30,3 +30,33 @@ for (let num of view) {
 // console.log(dataView.getUint8(0));
 // console.log(dataView.getUint16(0));
 // console.log(dataView.getUint32(0));
+
+function closure() {
+  const obj = {
+    name: "dongjincheng",
+  };
+  function modifyObj(name) {
+    obj.name = name || "djk";
+  }
+  function getObj() {
+    return obj;
+  }
+  return {
+    modifyObj,
+    getObj,
+  };
+}
+const closure1 = closure();
+closure1.modifyObj();
+console.log(closure1.getObj(), 1);
+const closure2 = closure();
+console.log(closure2.getObj(), 2);
+
+function callName(age, name) {
+  this.age = age;
+  this.name = name;
+}
+
+const nameBind = callName.bind(null, 18);
+const djc = new nameBind("dongjincheng");
+console.log(djc);

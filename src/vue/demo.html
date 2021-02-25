@@ -9,10 +9,11 @@
     <div id="app">
         <span :title="lastName">{{lastName}}</span>
         <button :[firstName]="isButtonDisalbed">阿牛</button>
+        <h2 v-text="firstname+'1'">{{fullName}}</h2>
+        <h2 v-pre>{{getFullName()}}</h2>
+        <!-- <h2>{{getFullName()}}</h2>
         <h2>{{getFullName()}}</h2>
-        <h2>{{getFullName()}}</h2>
-        <h2>{{getFullName()}}</h2>
-        <h2>{{getFullName()}}</h2>
+        <h2>{{getFullName()}}</h2> -->
     </div>
     <script src="./vue.js"></script>
     <script>
@@ -36,18 +37,30 @@
                         console.log(newVal, oldVal)
                     },
                     get(){
+                        console.log(1)
                         return this.firstName + '  ' + this.lastName
                     }
+                }
+            },
+            watch:{
+                firstName:{
+                    handler(newVal){
+                    console.log(2)
+                },
+                immediate: true
                 }
             },
             mounted(){
                 for(let book of this.books){
                     console.log(book)
                 }
+                // setTimeout(()=>{
+                //     this.firstName = '1'
+                // }, 1200)
             },
             methods: {
                 getFullName(){
-                    console.log(12)
+                    console.log(3)
                     return this.firstName + '  ' + this.lastName
                 }
             }

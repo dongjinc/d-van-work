@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            font-size: 20px;
+            line-height: 40px;
+        }
+        .detail-flex{
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+        }
+        .detail-content{
+            flex-grow: 1;
+            flex-shrink: 2;
+        }
+        .details-footer{
+            flex: 0 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- flex-direction、flex-wrap、flex-flow -->
+    <!-- 主轴排序 justify-content -->
+    <!-- 交叉轴排序 align-items - 单行 align-content - 多行 -->
+    <!-- flex-basis flex-grow  flex-shrink -> flex  -->
+    <!-- order align-self -->
+    <div class="main">
+        <div class="detail-flex">
+            <div class="detail-content">odd</div>
+            <div class="detail-content">odd</div>
+            <div class="detail-footer">detail-footer</div>
+        </div>
+    </div>
+</body>
+</html>

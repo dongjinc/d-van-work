@@ -6,14 +6,30 @@
     <title>Document</title>
 </head>
 <body>
+    <input type="range" oninput="love(e)">
     <ul>
         <li><a href="#/">我是主页</a></li>
         <li><a href="#/b">我是b</a></li>
         <li><a href="#/c">我是c</a></li>
         <div id="app">
-
         </div>
     </ul>
-    <script src="./demo.ts"></script>
+    <!-- <script src="./demo.ts"></script> -->
+    <script>
+        function love(e){
+            console.log(e)
+        }
+        const obj = {
+            a: 1,
+            b: 2,
+            c: 3
+        }
+        for(const [key, value] of Object.entries(obj)){
+            console.log(key,value, 12)
+        }
+        for(let i in obj){
+            console.log(i)
+        }
+    </script>
 </body>
 </html>

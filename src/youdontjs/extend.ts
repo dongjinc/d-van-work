@@ -18,15 +18,15 @@
 // }
 
 var Vehicle = {
-    engines: 1,
-    ignition: function(){
-        console.log('turning')
-    },
-    drive: function(){  
-        this.ignition()
-        console.log('Streeing', this)
-    }
-}
+  engines: 1,
+  ignition: function () {
+    console.log("turning");
+  },
+  drive: function () {
+    this.ignition();
+    console.log("Streeing", this);
+  },
+};
 
 // drive: function(){
 //     // 由于Car和Vehicle中都有drive函数，为了指明调用对象，必须使用绝对引用。
@@ -43,25 +43,27 @@ var Vehicle = {
 // })
 // console.log(Car.drive())
 
-
 /**
  * 混合复制
- * 
+ *
  */
-function mixins(sourceObj, targetObj){
-    for(const key in sourceObj){
-        targetObj[key] = sourceObj[key]
-    }
-    return sourceObj
+function mixins(sourceObj, targetObj) {
+  for (const key in sourceObj) {
+    targetObj[key] = sourceObj[key];
+  }
+  return sourceObj;
 }
 
-const Car1 = mixins(Vehicle, {})
-const love = mixins({
+const Car1 = mixins(Vehicle, {});
+const love = mixins(
+  {
     wheels: 4,
-    drive: function(){
-        console.log(this.wheels)
-    }
-}, Car1)
+    drive: function () {
+      console.log(this.wheels);
+    },
+  },
+  Car1
+);
 // Car1.drive()
 // console.log(Vehicle.drive)
 
@@ -70,50 +72,50 @@ const love = mixins({
  * 显示混入模式到一种变体被称为"寄生继承"，既是显示又是隐式的
  */
 
- function Vehicle1(this: any){
-     this.engines = 1
- }
- Vehicle1.prototype.ignition = function(){
-     console.log('Turning on my')
- }
- Vehicle1.prototype.drive = function(){
-     this.ignition()
-     console.log('Streeing')
- }
-function Car2(){
-    const car = new Vehicle1()
-    car.wheels = 4
-    const vehDrive = car.drive
-    car.drive = function(){
-        vehDrive.call(this)
-        console.log(this.wheels)
-    }
-    return car
+function Vehicle1() {
+  this.engines = 1;
 }
-const myCar = Car2()
-myCar.drive()
+Vehicle1.prototype.ignition = function () {
+  console.log("Turning on my");
+};
+Vehicle1.prototype.drive = function () {
+  this.ignition();
+  console.log("Streeing");
+};
+function Car2() {
+  const car = new Vehicle1();
+  car.wheels = 4;
+  const vehDrive = car.drive;
+  car.drive = function () {
+    vehDrive.call(this);
+    console.log(this.wheels);
+  };
+  return car;
+}
+const myCar = Car2();
+myCar.drive();
 
- /**
-  * 隐式混入
-  * 与之前提到的显式伪多态很像
-  */
+/**
+ * 隐式混入
+ * 与之前提到的显式伪多态很像
+ */
 const something = {
-    cool: function(){
-        // @ts-ignore
-        this.greeting = 'hello world'
-        // @ts-ignore
-        this.count = this.count ? this.count + 1 : 1
-    }
-}
-something.cool()
+  cool: function () {
+    // @ts-ignore
+    this.greeting = "hello world";
+    // @ts-ignore
+    this.count = this.count ? this.count + 1 : 1;
+  },
+};
+something.cool();
 // @ts-ignore
-console.log(something.greeting)
+console.log(something.greeting);
 
 const another = {
-    cool: function(){
-        something.cool.call(this)
-    }
-}
-another.cool()
+  cool: function () {
+    something.cool.call(this);
+  },
+};
+another.cool();
 // @ts-ignore
-console.log(another.greeting)
+console.log(another.greeting);

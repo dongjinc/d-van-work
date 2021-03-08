@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link  media=""/>
+</head>
+<style>
+p {
+    outline: solid deepskyblue;    
+}
+img {
+    float: left;
+}
+.clear{
+    margin-left: 15px;float: left;
+}
+.clear::after{
+    clear: both;
+}
+body{
+ overflow: hidden;
+ transition: all 1000ms ease;
+}
+</style>
+<body>
+    <!-- 
+        1.不同浏览器的标签默认的margin和padding不一样
+        IE6 双边距bug 块属性标签float后，横行的margin情况下，ie显得比设置的会大，hack display:inline 转为行内属性
+        2.渐进识别方式：
+        background-color:#f1ee18;/所有识别/
+        .background-color:#00deff\9; /IE6、7、8识别/
+        +background-color:#a200ff;/IE6、7识别/
+        _background-color:#1e0bd1;/IE6识别*/
+        3.设置较小高度标签(小于10px),在ie6，7高度超出自己设置高度，使用overflow: hidden或者设置line-height
+        4.兼容性的问题：在IE5 IE6中，为float的盒子指定margin时，左侧的margin可能会变成两倍的宽度。通过改变padding或者指定盒子的display：inline解决。
+    -->
+
+    <!-- <p><img src="https://image.zhangxinxu.com/image/blog/202005/2020-05-12_224426.png"></p> -->
+    <!-- https://zhuanlan.zhihu.com/p/75132250 -->
+    <!-- 自我介绍 2 - 3分钟 -->
+<div>
+    <span class="clear">1</span>
+    <div style="height: 200px;" >
+    <div>使用overflow: hidden或者设置line-height</div>
+    <div>使用overflow: hidden或者设置line-height</div>
+        </div>
+    <ul><li>1</li><li>1</li></ul>
+</div>
+</body>
+</html>

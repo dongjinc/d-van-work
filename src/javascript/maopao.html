@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件冒泡</title>
+</head>
+<body>
+    <div>
+        <p id="parEle">我是父元素    <span id="sonEle">我是子元素</span></p>
+    </div>
+    <!-- <div id="s1">s1
+        <div id="s2">s2</div>
+    </div>
+    <script>
+        s1.addEventListener("click",function(e){
+        console.log("s1 捕获事件");
+    },true);
+    s2.addEventListener("click",function(e){
+        console.log("s2 捕获事件");
+    },true); -->
+    </script>
+</body>
+</html>
+<script type="text/javascript">
+var sonEle = document.getElementById('sonEle');
+var parEle = document.getElementById('parEle');
+// 对于非target节点则先执行捕获在执行冒泡
+// 对于target节点则是先执行先注册的事件，无论冒泡还是捕获
+
+
+parEle.addEventListener('click', function (e) {
+    alert('父级 冒泡');
+    console.log(e)
+}, false);
+
+parEle.addEventListener('click', function () {
+    alert('父级 捕获');
+});
+
+// sonEle.addEventListener('click', function () {
+//     alert('子级捕获');
+// }, true);
+// sonEle.addEventListener('click', function () {
+//     alert('子级冒泡');
+// }, false);
+</script>

@@ -76,4 +76,25 @@ function foo(el){
      id: 'dong'
  }
  myArray.forEach(foo, obj)
- 
+
+
+ enum OrderType {
+     '美妆' = 1,
+     '电器' = 2,
+     '家具' = 3
+ }
+ const orderFunction = {
+    [OrderType['']](){
+        console.log('美妆订单')
+    }
+ }
+
+ Object.prototype(Object.prototype, "__proto__", {
+     get: function(){
+         return Object.getPrototypeOf(this)
+     },
+     set: function(o){
+         Object.setPrototypeOf(this, o)
+         return o
+     }
+ })

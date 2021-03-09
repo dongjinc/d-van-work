@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 解决多重条件业务
+      const orderType = 1; // 1: 美妆，2：电器，3：家具
+      if (orderType === 1) {
+        console.log("美妆订单"); // 简单是用打印方法来举例，实际可以当做每个订单条件跳转、展示的操作都不一样
+      } else if (orderType === 2) {
+        console.log("电器订单");
+      } else if (orderType === 3) {
+        console.log("家具订单");
+      }
+
+      // 这样语义化并不好，可以使用枚举 作为映射 展示英文产物
+      const orderType = 1; // 1: 美妆，2：电器，3：家具
+      const orderFunction = {
+        1() {
+          console.log("美妆订单");
+        },
+        2() {
+          console.log("电器订单");
+        },
+        3() {
+          console.log("家具订单");
+        },
+      };
+
+      orderFunction[orderType]();
+
+      const orderType = 1; // 1: 美妆，2：电器，3：家具
+      const orderWay = 1; // 1：h5，2：app，3：小程序
+
+      if (orderType === 1) {
+        if (orderWay === 1) {
+          console.log("美妆订单h5");
+        } else if (orderWay === 2) {
+          console.log("美妆订单app");
+        } else if (orderWay === 3) {
+          console.log("美妆订单小程序");
+        }
+      } else if (orderType === 2) {
+        if (orderWay === 1) {
+          console.log("电器订单h5");
+        } else if (orderWay === 2) {
+          console.log("电器订单app");
+        } else if (orderWay === 3) {
+          console.log("电器订单小程序");
+        }
+      } else if (orderType === 3) {
+        if (orderWay === 1) {
+          console.log("家具订单h5");
+        } else if (orderWay === 2) {
+          console.log("家具订单app");
+        } else if (orderWay === 3) {
+          console.log("家具订单小程序");
+        }
+      }
+    </script>
+  </body>
+</html>

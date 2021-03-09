@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+    //   class Plant {
+    //     constructor(name) {
+    //       this.name = name;
+    //     }
+    //     grow() {
+    //       console.log('处于生长阶段哦');
+    //     }
+    //   }
+    //   class Apple extends Plant {
+    //       constructor(name, color){
+    //           super(name)
+    //           this.color = color
+    //           console.log(this.color)
+    //       }
+    //   }
+    //   class Pear extends Plant{
+    //       constructor(name, color){
+    //           super(name)
+    //           this.color = color
+    //           console.log(this.color);
+    //       }
+    //   }
+
+      class Plant {
+          constructor(name){
+              this.name = name
+          }
+          grow(){
+              console.log('growing')
+          }
+      }
+  
+      class Apple extends Plant {
+          constructor(name, color){
+              super(name)
+              this.color = color
+          }
+      }
+      class Orange extends Plant {
+          constructor(name, color){
+              super(name)
+              this.color = color
+          }
+      }
+    //   class AppleGactory {
+    //       create(){
+    //           return new Apple('苹果', '红色')
+    //       }
+    //   }
+    //   class OrangeFactory{
+    //       create(){
+    //           return new Orange('橘子', '橙色')
+    //       }
+    //   }
+    //   新增Factory
+    class Factory {
+      create(){}
+    }
+    class AppleFactory extends Factory{
+        static create(){
+            return new Apple('苹果', '红色')
+        }
+    }
+      const settings = {
+          'apple': new AppleGactory().create()
+      }
+      console.log(settings['apple']);
+      const 
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择器</title>
+</head>
+<style>
+    /* 通用兄弟选择符 */
+    /* p ~ span{
+        color: red;
+    } */
+
+    span { background-color: white; }
+    /* 子选择器 */
+    /* div > span {
+        background-color: DodgerBlue;
+    } */
+    /* 后代选择器 */
+    div  span {
+        background-color: DodgerBlue;
+    }
+</style>
+<body>
+    <!-- https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors -->
+    <!-- 子选择器 -->
+    <div>
+        <span>Span 1. In the div.
+          <span>Span 2. In the span that's in the div.</span>
+        </span>
+      </div>
+      <span>Span 3. Not in a div at all</span>
+
+      <!-- 通用兄弟选择符 位置无须紧邻，只须同层层级 A~B选择A元素之后所有同层B元素 -->
+        <!-- <span>This is not red.</span>
+        <p>Here is a paragraph.</p>
+        <code>Here is some code.</code>
+        <span>And here is a span.</span> -->
+        <!-- 
+            继承性的属性
+            text-indent: 文本缩进
+            text-align: 文本水平对齐
+            line-height: 行高
+            cursor: pointer
+            font-size: 10px
+            color: red
+            font-weight: bold
+            font-family: 字体
+            font-style: 字体风格
+         -->
+         <!-- https://www.runoob.com/w3cnote/front-end-developer-questions-and-answers.html -->
+         <!-- https://juejin.cn/post/6844903784229896199 -->
+</body>
+</html>

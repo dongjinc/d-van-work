@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      <!-- <div :class="[{'text-class': !!message}, 'error-test']">我卡你</div>
+      <my-component class="text-error"></my-component> -->
+      <!-- <div style="display: flex;" :style="{transform: `translate(${size}px, ${size}px)`}">我爱你</div> -->
+      <div :style="{display: ['-webkit-box','-ms-flexbox','flex']}">哈哈</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component('my-component', {
+            template: '<p class="foo bar">H</p>'
+        })
+        const vm = new Vue({
+            el: '#app',
+            data:{
+                message: 'Hello',
+                size: 12,
+                color: 'red'
+            },
+            computed: {
+                classObject(){
+                    return {
+                        active: !!this.message
+                    }
+                }
+            }
+        })
+  </script>
+</body>
+</html>

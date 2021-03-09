@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 500px;
+            height:500px;
+            border: 1px solid red;
+            /* line-height: 500px; demo2 */
+            /* position: relative; demo4 */
+            display: table;
+        }
+        .demo1{
+            text-align: center;
+            line-height: 500px;
+        }
+        .demo2{
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            text-align: center;
+            /* line-height: 50px; */
+        }
+        .demo3{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .demo4{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .demo5{
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+        }
+        section {
+    height:150px;
+}
+.box {
+    background-color: rgb(224, 206, 247);
+    border: 5px solid rebeccapurple;
+}
+.box[style] {
+    background-color: aliceblue;
+    border: 5px solid steelblue;
+}
+.float {
+    float: left;
+    overflow: hidden; /* required by resize:both */
+    resize: both;
+    margin-right:25px;
+    width: 200px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, .75);
+    border: 1px solid black;
+    padding: 10px;
+}
+    </style>
+</head>
+<body>
+    
+   <!-- 水平垂直居中 -->
+    <!-- <div class="box">
+        <div class="demo5">1</div>
+    </div> -->
+    
+    <!-- 画一条0.5px的直线 -->
+    <!-- <div style="height:1px;transform:scale(0.5)">1</div> -->
+
+    <!-- 盒模型 默认box-sizing: content-box  ie盒模型: border-box -->
+    <!-- <div style="background-color: red;padding: 50px;box-sizing: border-box;width: 100%;">
+        1
+    </div> -->
+
+    <!-- 画三角形 -->
+    <!-- <div style="width: 0;height: 0;border-width: 100px;border-style: solid;border-color: transparent transparent #0099CC  transparent;"></div> -->
+
+    <!-- 元素浮动 bfc -->
+    <!-- overflow: auto; -->
+    <!-- <div style="border: 1px solid goldenrod;display: flow-root;">
+        <div style="width: 50px;height:50px;background: rebeccapurple;float: left;"></div>
+    </div> -->
+    
+    <!-- <div style="height: 50px;margin: 10px 0;background: blue;"></div>
+    <div style="overflow: hidden;background: red;">
+        <div style="height: 50px;margin: 10px 0;">red inner</div>
+    </div> -->
+    <section>
+        <div class="float">Try to resize this outer float</div>
+        <div class="box"><p>Normal</p></div>
+      </section>
+      <section>
+        <div class="float">Try to resize this outer float</div>
+        <div class="box" style="display:flow-root"><p><code>display:flow-root</code><p></div>
+      </section>
+
+</body>
+</html>

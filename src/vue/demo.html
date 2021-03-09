@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <span :title="lastName">{{lastName}}</span>
+        <button :[firstName]="isButtonDisalbed">阿牛</button>
+        <h2 v-text="firstname+'1'">{{fullName}}</h2>
+        <h2 v-pre>{{getFullName()}}</h2>
+        <!-- <h2>{{getFullName()}}</h2>
+        <h2>{{getFullName()}}</h2>
+        <h2>{{getFullName()}}</h2> -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        const data = {
+            firstname: 'disabled',
+            isButtonDisalbed: 'null',
+                firstName: 'z',
+                lastName: 'l',
+                books: [
+                    {id: 110, name: 'unix', price: 192},
+                    {id: 110, name: 'unix', price: 192},
+                    {id: 110, name: 'unix', price: 192}
+                ]
+            }
+        const app = new Vue({
+            el: '#app',
+            data,
+            computed:{
+                fullName: {
+                    set(newVal, oldVal){
+                        console.log(newVal, oldVal)
+                    },
+                    get(){
+                        console.log(1)
+                        return this.firstName + '  ' + this.lastName
+                    }
+                }
+            },
+            watch:{
+                firstName:{
+                    handler(newVal){
+                    console.log(2)
+                },
+                immediate: true
+                }
+            },
+            mounted(){
+                for(let book of this.books){
+                    console.log(book)
+                }
+                // setTimeout(()=>{
+                //     this.firstName = '1'
+                // }, 1200)
+            },
+            methods: {
+                getFullName(){
+                    console.log(3)
+                    return this.firstName + '  ' + this.lastName
+                }
+            }
+        })
+        
+  </script>
+</body>
+</html>

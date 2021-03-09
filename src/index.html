@@ -4,7 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .content{
+            display: table;
+        }
+        .content ul{
+            display: table-row;
+        }
+        .content ul li{
+            display: table-cell;
+            min-width: 200px;
+            background-color: pink;
+            border: 1px solid blue;
+            text-align: center;
+            max-width: 249px;
+            word-break: break-all;
+        }
+    </style>
 </head>
 <body>
+  
+    <div class="content">
+        <ul>
+            <li>111</li>
+            <li>222</li>
+            <li>333</li>
+            <li>111</li>
+        </ul>
+        <ul>
+            <li>111</li>
+            <li>222</li>
+            <li>333</li>
+            <li>111</li>
+        </ul>
+    </div>
 </body>
 </html>

@@ -13,3 +13,14 @@ function createArray<T>(length: number, value: T): Array<T> {
 }
 
 createArray(3, "1");
+
+interface User{
+    id: number
+    name: string
+    age: number
+}
+
+let str: Exclude<keyof User, 'id'> = 'age'
+
+
+type Love = Omit<User, 'id'>

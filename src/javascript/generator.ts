@@ -134,3 +134,74 @@ for (let i = 0; i < arr.length; i++) {
     obj[key] = arr[i];
   }
 }
+
+
+
+function doSomething() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(1);
+    }, 1000);
+  });
+}
+const array = [1, 2, 3, 4];
+async function process() {
+  for (let i of array) {
+    const result = doSomething(i);
+    console.log(result);
+  }
+}
+process();
+
+
+onst asyncItems = {
+    a: 1,
+    b: 2,
+    c: 3,
+    [Symbol.asyncIterator]() {
+        const items = this
+        const keys = Object.keys(items)
+        const len = keys.length
+        let pointer = 0
+        return {
+            next() {
+                const done = pointer >= len
+                const value = !done ? items[keys[pointer++]] : undefined;
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({value, done})
+                    }, 1000)
+                }) 
+            }
+        }
+    }
+}
+
+const asyncItems = {
+    a: 1,
+    b: 2,
+    c: 3,
+    [Symbol.iterator]() {
+        const items = this
+        const keys = Object.keys(items)
+        const len = keys.length
+        let pointer = 0
+        return {
+            next() {
+                const done = pointer >= len
+                const value = !done ? items[keys[pointer++]] : undefined;
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({value, done})
+                    }, 1000)
+                }) 
+            }
+        }
+    }
+}
+async function process(array) {
+  for await (let i of asyncItems) {
+    console.log(i)
+  }
+}
+process()

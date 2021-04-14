@@ -51,3 +51,16 @@ Function.prototype.apply2 = function (ctx, arr) {
   delete ctx.fn;
   return result;
 };
+
+
+Function.prototype.call3 = function(ctx){
+  ctx = ctx ? Object(ctx): window
+  ctx.fn = this
+  var args = []
+  for (let i = 1; i < arguments.length; i++) {
+    args.push("arguments[" + arguments[i] + "]");
+  }
+  const result = eval("ctx.fn("+ args +")");
+  delete ctx.fn
+  return result
+}

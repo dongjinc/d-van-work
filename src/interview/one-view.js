@@ -15,3 +15,11 @@ function love() {
     console.log(name);
   };
 }
+
+async function async1() {
+  await Promise.resolve();
+  console.log(1);
+}
+async1().then(() => {
+  console.log(2);
+});

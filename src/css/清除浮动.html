@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father{
+            width: 400px;
+            border: 1px solid deeppink;
+        }
+        .big{
+            width: 200px;
+            height: 200px;
+            background-color: darkblue;
+            float: left;
+        }
+        .small{
+            width: 120px;
+            height: 120px;
+            background-color: darkcyan;
+            float: left;
+        }
+        .clearfix::after{
+            content: "";
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+        .clear-box{
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="father clear-box">
+        <div class="big">big</div>
+        <div class="small">small</div>
+        <!-- <div class="clear"></div> -->
+    </div>
+</body>
+</html>

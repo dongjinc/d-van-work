@@ -52,12 +52,69 @@ function dispath(_type, _payload) {
   const action = { type, payload };
   const entry = this._actions[type];
 
+  // 订阅 store 的 action。
+  // handler 会在每个 action 分发的时候调用并接收 action 描述和当前的 store 的 state 这两个参数：
+  /**
+   * 通常用于插件
+   * 例子
+     store.subscribeAction((action, state) => {
+        console.log(action.type, action.payload)
+      })
+   */
+  try {
+    this._actionSubscribers
+      .slice()
+      .filter((sub) => sub.before)
+      .forEach((sub) => sub.before(action, this.state));
+  } catch (e) {
+    if (__DEV__) {
+      console.warn(`[vuex] error in before action subscribers: `);
+      console.error(e);
+    }
+  }
+
+  // 如果entry是不大于1时，返回的函数是Promise形式
+  // store内actions方法
   const result =
     entry.length > 1
       ? Promise.all(entry.map((handler) => handler(payload)))
       : entry[0](payload);
-  result.then(() => {
-    console.log(1);
+
+  return new Promise((resolve, reject) => {
+    result.then(
+      (res) => {
+        try {
+          this._actionSubscribers
+            .filter((sub) => sub.after)
+            .forEach((sub) => sub.after(action, this.state));
+        } catch (e) {
+          if (__DEV__) {
+            console.warn(`[vuex] error in after action subscribers: `);
+            console.error(e);
+          }
+        }
+        resolve(res);
+      },
+      (error) => {
+        /**
+         * 自 3.4.0 起，subscribeAction 也
+         * 可以指定一个 error 处理函数以捕获分发 action 的时候被抛出的错误。
+         * 该函数会从第三个参数接收到一个 error 对象。
+         */
+        // 例子
+        store.subscribeAction({
+          error: (action, state, error) => {
+            console.log(`error action ${action.type}`);
+            console.error(error);
+          },
+        });
+        try {
+          this._actionSubscribers
+            .filter((sub) => sub.error)
+            .forEach((sub) => sub.error(action, this.state, error));
+        } catch (e) {}
+      }
+    );
   });
 }
 
@@ -153,4 +210,44 @@ function _withCommit(fn) {
   this._committing = true;
   fn();
   this._committing = committing;
+}
+
+/**
+ * store -> action事件注册
+ * @param {(Function | {before: Function, after: Function, error: Function})} fn
+ * @param {*} options
+ */
+function subscribeAction(fn, options) {
+  // 从 3.1.0 起，subscribeAction 也可以指定订阅处理函数的被调用时机应该
+  // 在一个 action 分发之前还是之后 (默认行为是之前)：
+  const subs = typeof fn === "function" ? { before: fn } : fn;
+  genericSubscribe(subs, this._actionSubscribers, options);
+}
+// 用法
+// 实例1 store.subscribeAction(handler, { prepend: true })
+// 实例2
+// store.subscribeAction({
+//   before: (action, state) => {},
+//   after: (action, state) => {},
+// });
+
+/**
+ * 注册事件
+ * @param {*} fn
+ * @param {*} subs
+ * @param {*} options
+ */
+function genericSubscribe(fn, subs, options) {
+  // 默认情况下，新的处理函数会被添加到其链的尾端，因此它会在其它之前已经被添加了的处理函数之后执行。
+  // 这一行为可以通过向 `options` 添加 `prepend: true` 来覆写，即把处理函数添加到其链的最开始
+  if (subs.indexOf(fn) < 0) {
+    options && options.prepend ? subs.unshift(fn) : subs.push(fn);
+  }
+  //  要停止订阅，调用此方法返回的函数即可停止订阅。
+  return () => {
+    const i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  };
 }
